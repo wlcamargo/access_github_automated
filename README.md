@@ -1,6 +1,6 @@
 # Acesso automatizado ao Github
 
-O programa tem o objetivo de enviar convites automatizados para um repositório específico específico do Github, com base em uma planilha de Excel que vai obter o user e o tipo de acesso adequado ao user.
+O programa tem o objetivo de enviar convites automatizados para um repositório específico do Github, com base em uma planilha de Excel que vai obter o user e o tipo de acesso adequado ao user.
 
 ## Arquitetura
 ![image](assets/send-invite-github.png)
