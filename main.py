@@ -13,10 +13,11 @@ if not token or not owner or not repo:
     print("Make sure the environment variables GH_TOKEN, OWNER, and REPO are correctly set in the .env file.")
     exit()
 
-excel_file = 'collaborator.xlsx'
+excel_file = "/mnt/c/Users/walla/OneDrive/collabs.xlsx"  # Replace with your actual link
 
 try:
-    df = pd.read_excel(excel_file)
+    df = pd.read_excel(excel_file, engine='openpyxl')  # Specify the engine
+    print(df)
 except Exception as e:
     print(f"Error reading the Excel file: {e}")
     exit()
@@ -28,7 +29,7 @@ if not expected_columns.issubset(df.columns):
 
 for index, row in df.iterrows():
     username = row['username']
-    permission = row['permission']
+    permission = 'pull'
 
     if pd.isna(username) or pd.isna(permission):
         print(f"Row {index + 1} is missing data. Skipping this row.")
