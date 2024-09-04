@@ -22,7 +22,7 @@ except Exception as e:
     print(f"Error reading the Excel file: {e}")
     exit()
 
-expected_columns = {'username', 'permission'}
+expected_columns = {'username'}
 if not expected_columns.issubset(df.columns):
     print(f"The Excel spreadsheet must contain the columns: {expected_columns}")
     exit()
