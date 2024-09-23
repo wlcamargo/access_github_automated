@@ -7,14 +7,6 @@ O programa tem o objetivo de enviar convites automatizados para um repositório 
 
 ## Pré-requisitos
 * Python 3.10
-* Libs do Python
-
-```
-openpyxl           3.1.5
-pandas             2.2.2
-python-dotenv      1.0.1
-requests           2.32.3
-```
 
 ## Como utilizar a automação?
 Clone o repositório
@@ -42,11 +34,29 @@ Instale as dependências
 pip install -r requirements.txt
 ```
 
-Atualize a planilha ```collaborators.xlsx``` com os users que deseja dar acesso ao repositório.
-
 Atualize o arquivo com os valores das variáveis corretas no arquivo ```.env_sample``` e altere o nome dele para ```.env```
 
-Execute o programa ```main.py```
+## Concede acesso com base em planilha do Excel
+Execute o programa ```python3 github-access-excel.py```
+
+## Concede acesso com base em Google Sheets
+Execute o programa ```python3 github-access-google.py```
+
+## Warning
+Para capturar dados de uma planilha do Google Sheets, será necessário exportar a chave json que concede acesso. 
+
+## Como gerar a chave json?
+1 - Procure no Google por ``` google console ```
+
+![image](assets/google-console.png)
+
+2 - No portal, clique em ``` apis & services```
+
+![image](assets/api-and-services.png)
+
+3 - Crie e exporte a credencial no formato ```.json```
+
+![image](assets/credentials.png)
 
 ## Referências
 

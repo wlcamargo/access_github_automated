@@ -1,30 +1,39 @@
 import os
 import pandas as pd
-import requests
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 from dotenv import load_dotenv
+import requests
 
 load_dotenv()
 
 token = os.getenv('GH_TOKEN')
 owner = os.getenv('OWNER')
 repo = os.getenv('GITHUB_REPOSITORY')
+planilha = os.getenv('LINK_PLANILHA')
 
 if not token or not owner or not repo:
     print("Make sure the environment variables GH_TOKEN, OWNER, and REPO are correctly set in the .env file.")
     exit()
 
-excel_file = "/mnt/c/Users/walla/OneDrive/collabs.xlsx"  # Replace with your actual link
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name('key.json', scope)
+client = gspread.authorize(creds)
+
+spreadsheet_url = planilha
+sheet = client.open_by_url(spreadsheet_url).sheet1
 
 try:
-    df = pd.read_excel(excel_file, engine='openpyxl')  # Specify the engine
+    data = sheet.get_all_records()
+    df = pd.DataFrame(data)
     print(df)
 except Exception as e:
-    print(f"Error reading the Excel file: {e}")
+    print(f"Error reading the Google Sheets data: {e}")
     exit()
 
 expected_columns = {'username'}
 if not expected_columns.issubset(df.columns):
-    print(f"The Excel spreadsheet must contain the columns: {expected_columns}")
+    print(f"The Google Sheets spreadsheet must contain the columns: {expected_columns}")
     exit()
 
 for index, row in df.iterrows():
@@ -43,7 +52,7 @@ for index, row in df.iterrows():
     }
 
     data = {
-        'permission': permission  # Can be 'pull', 'push', 'admin'
+        'permission': permission 
     }
 
     response = requests.put(url, headers=headers, json=data)
