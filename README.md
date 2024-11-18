@@ -58,8 +58,17 @@ Para capturar dados de uma planilha do Google Sheets, será necessário exportar
 
 ![image](assets/credentials.png)
 
-## Referências
+## Como criar uma imagem Docker da aplicação?
+Execute o comando:
+```
+docker build -t access-github .
+```
 
+## Orquestração no Airflow
+Na pasta ```dag```, tem uma dag de exemplo que vai executar de uma em uma hora.
+
+
+## Referências
 https://docs.github.com/en/rest?apiVersion=2022-11-28
 
 
